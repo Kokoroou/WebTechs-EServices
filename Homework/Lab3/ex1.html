@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <a id="red" href="#">RED</a>
+        <a id="green" href="#">GREEN</a>
+        <a id="blue" href="#">BLUE</a>
+
+        <p id="text">Studying abroad has two main benefits. Firstly, people who study abroad can
+            get a better job when they return to their home country. This is because their
+            qualifications and experience mean that they tend to get jobs that are higher paid, and
+            they can also gain promotion quickly. Another advantage of studying abroad is the
+            independence students can gain. For example, students have to cope with the challenges
+            of living alone and meeting new people from different cultures. As a consequence,
+            they will become more confident in their life and in their relationships with others.
+            All in all, it is clear that studying abroad is a beneficial experience.</p>
+
+        <script type="text/javascript">
+            var red = document.getElementById('red');
+            var green = document.getElementById('green');
+            var blue = document.getElementById('blue');
+            var text = document.getElementById('text');
+
+            red.addEventListener('mouseover', function changeToRed(){
+                text.style.color = 'red';
+            })
+            red.addEventListener('mouseout', function redToBlack(){
+                text.style.color = 'black';
+            })
+
+            green.addEventListener('mouseover', function changeToGreen(){
+                text.style.color = 'green';
+            })
+            green.addEventListener('mouseout', function greenToBlack(){
+                text.style.color = 'black';
+            })
+
+            blue.addEventListener('mouseover', function changeToBlue(){
+                text.style.color = 'blue';
+            })
+            blue.addEventListener('mouseout', function blueToBlack(){
+                text.style.color = 'black';
+            })
+        </script>
+    </body>
+</html>

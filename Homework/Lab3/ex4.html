@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <form name="myForm" method="post">
+            <h2>Register</h2>
+            <input type="text" name="name" placeholder="name"><br>
+            <input type="text" name="email" placeholder="email"><br>
+            <input type="text" name="tel" placeholder="tel"><br>
+            <input type="submit" value="Submit" onclick="validateForm(document.myForm.name.value, document.myForm.email.value, document.myForm.tel.value)">
+        </form>
+        <script type="text/javascript">
+            function validateName(name){
+                if (name == ""){
+                    alert("Username must be filled out.");
+                }
+            }
+            function validateEmail(email){
+                if (!(email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))){
+                    alert("Wrong email format");
+                }
+            }
+            function validateTel(tel){
+                var tel_pattern = new RegExp("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$");
+                if (!(tel_pattern.test(tel))){
+                    alert("Wrong telephone format");
+                }
+            }
+            function validateForm(name, email, tel){
+                validateName(name);
+                validateEmail(email);
+                validateTel(tel);
+            }
+        </script>
+    </body>
+</html>
