@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark>
+    <name>My house</name>
+    <description>ngo 121 duong Le Thanh Nghi, phuong Dong Tam, quan Hai Ba Trung,
+        thanh pho Ha Noi</description>
+    <Point>
+      <coordinates>105.84280805699952,21.00148800814283</coordinates>
+    </Point>
+  </Placemark>
+</kml>
