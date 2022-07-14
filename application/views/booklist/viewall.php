@@ -1,12 +1,17 @@
 <div>
-	<form action="../items/add" method="post">
-		<input type="text" value="Write a task..." onclick="this.value=''" name="todo"> <input type="submit" value="Add">
+	<form action="../booklist/add" method="post">
+		<input type="text" value="Add a book to list..." onclick="this.value=''" name="library"> <input type="submit" value="Add">
 	</form>
 </div>
 
 <br/><br/>
 
-<div>
+<div class="menu">
+    <a href="../booklist/">Returned</a>
+    <a href="../booklist/">Borrowing</a>
+    <a href="../booklist/">Plan to borrow</a>
+
+
 	<table>
 		<tr>
 			<th style="width:70px">No.</th>

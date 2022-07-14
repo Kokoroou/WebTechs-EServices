@@ -1,53 +1,38 @@
-<html>
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-<title><?php echo $title?></title>
-<style>
-.item {
-width:400px;
+    <meta charset="utf-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
 
-}
+    <title>Booklist</title>
+    <meta name="description" content="List of books">
+    <meta name="author" content="Team 20">
 
-input {
-	color:#222222;
-font-family:georgia,times;
-font-size:24px;
-font-weight:normal;
-line-height:1.2em;
-	color:black;
-}
+    <meta property="og:title" content="Simple E-Library">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://e-library.me/WebTechs-EServices/booklists">
+    <meta property="og:description" content="List of book">
 
- a {
-	color:#222222;
-font-family:georgia,times;
-font-size:24px;
-font-weight:normal;
-line-height:1.2em;
-	color:black;
-	text-decoration:none;
-	
-}
-
-a:hover {
-	background-color:#BCFC3D;
-}
-h1 {
-color:#000000;
-font-size:41px;
-letter-spacing:-2px;
-line-height:1em;
-font-family:helvetica,arial,sans-serif;
-border-bottom:1px dotted #cccccc;
-}
-
-h2 {
-color:#000000;
-font-size:34px;
-letter-spacing:-2px;
-line-height:1em;
-font-family:helvetica,arial,sans-serif;
-
-}
-</style>
+    <link rel="stylesheet" href="./../public/css/styles.css" type="text/css">
 </head>
+
 <body>
-<h1>My Todo-List App</h1>
+	
+    <header>
+		<div class="container">
+			<span class="left">
+				<h1>E-library</h1>
+			</span>
+
+			<img src="./../public/img/user/default.png" alt="User's Avatar" class="right avatar">
+
+			<span class="right">
+				<form action="./../searching/search" method="post">
+					<input type="text" value="Book's name or author..." onclick="this.value=''" name="library"> <input type="submit" value="🔍">
+				</form>
+			</span>
+		</div>
+    </header>
+
+	<article>
+    

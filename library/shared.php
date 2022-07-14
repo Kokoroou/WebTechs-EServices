@@ -1,5 +1,6 @@
 <?php
 
+
 /** Check if environment is development and display errors **/
 
 function setReporting() {
@@ -21,14 +22,6 @@ function stripSlashesDeep($value) {
 	return $value;
 }
 
-function removeMagicQuotes() {
-if ( get_magic_quotes_gpc() ) {
-	$_GET    = stripSlashesDeep($_GET   );
-	$_POST   = stripSlashesDeep($_POST  );
-	$_COOKIE = stripSlashesDeep($_COOKIE);
-}
-}
-
 /** Check register globals and remove them **/
 
 function unregisterGlobals() {
@@ -46,26 +39,66 @@ function unregisterGlobals() {
 
 /** Main Call Function **/
 
+// function callHook() {
+// 	global $url;
+
+// 	$urlArray = array();
+// 	$urlArray = explode("/",$url);
+
+// 	$controller = $urlArray[0];
+// 	array_shift($urlArray);
+// 	$action = $urlArray[0];
+// 	array_shift($urlArray);
+// 	$queryString = $urlArray;
+
+// 	$controllerName = $controller;
+// 	$controller = ucwords($controller);
+// 	$model = rtrim($controller, 's');
+// 	$controller .= 'Controller';
+// 	$dispatch = new $controller($model,$controllerName,$action);
+
+// 	if ((int)method_exists($controller, $action)) {
+// 		call_user_func_array(array($dispatch,$action),$queryString);
+// 	} else {
+// 		/* Error Generation Code Here */
+// 	}
+// }
+
+
 function callHook() {
 	global $url;
+	global $uri;
 
-	$urlArray = array();
+	/** Get path from URL **/
 	$urlArray = explode("/",$url);
+	
+	/** Get query from URI **/
+	$uri = parse_url($uri);
+	$query = array();
+	if (array_key_exists("query", $uri)) {
+		$queryArray = explode("&", $uri["query"]);
+		foreach ($queryArray as $q) {
+			$query = array_merge($query, parse_ini_string($q));
+		}	
+	}
 
-	$controller = $urlArray[0];
-	array_shift($urlArray);
-	$action = $urlArray[0];
-	array_shift($urlArray);
-	$queryString = $urlArray;
+	/** Remove empty string at end of $urlArray **/
+	if (end($urlArray) == "") {
+		array_pop($urlArray);
+	}
+
+	/** Default value for controller and action **/
+	$controller = count($urlArray) > 0 ? $urlArray[0] : "home";
+	$action = count($urlArray) > 1 ? $urlArray[1] : "view";
 
 	$controllerName = $controller;
-	$controller = ucwords($controller);
-	$model = rtrim($controller, 's');
-	$controller .= 'Controller';
-	$dispatch = new $controller($model,$controllerName,$action);
+	$model = ucwords($controller);
+	$controller = $model . "Controller";
+
+	$dispatch = new $controller($model, $controllerName, $action);
 
 	if ((int)method_exists($controller, $action)) {
-		call_user_func_array(array($dispatch,$action),$queryString);
+		call_user_func_array(array($dispatch,$action),$query);
 	} else {
 		/* Error Generation Code Here */
 	}
@@ -73,7 +106,7 @@ function callHook() {
 
 /** Autoload any classes that are required **/
 
-function __autoload($className) {
+function autoloader($className) {
 	if (file_exists(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php')) {
 		require_once(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php');
 	} else if (file_exists(ROOT . DS . 'application' . DS . 'controllers' . DS . strtolower($className) . '.php')) {
@@ -81,11 +114,11 @@ function __autoload($className) {
 	} else if (file_exists(ROOT . DS . 'application' . DS . 'models' . DS . strtolower($className) . '.php')) {
 		require_once(ROOT . DS . 'application' . DS . 'models' . DS . strtolower($className) . '.php');
 	} else {
-		/* Error Generation Code Here */
 	}
 }
 
+spl_autoload_register('autoloader');
+
 setReporting();
-removeMagicQuotes();
 unregisterGlobals();
 callHook();
