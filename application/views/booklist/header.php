@@ -29,7 +29,7 @@
         set_description("List of book");
     </script>
 
-    <link rel="stylesheet" href="./../public/css/styles.css" type="text/css">
+    <link rel="stylesheet" href="./public/css/styles.css" type="text/css">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
 				<h1>E-library</h1>
 			</span>
 
-			<img src="./../public/img/user/default.png" alt="User's Avatar" class="right avatar">
+			<img src="./public/img/user/default.png" alt="User's Avatar" class="right avatar">
 
 			<span class="right">
 				<form action="./searching/search" method="post">

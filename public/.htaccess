@@ -6,4 +6,6 @@
 
     RewriteRule ^(.*)$ index.php?url=$1 [PT,L]
 
+    ErrorDocument 404 /error404
+
 </IfModule>

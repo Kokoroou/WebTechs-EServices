@@ -37,34 +37,6 @@ function unregisterGlobals() {
     }
 }
 
-/** Main Call Function **/
-
-// function callHook() {
-// 	global $url;
-
-// 	$urlArray = array();
-// 	$urlArray = explode("/",$url);
-
-// 	$controller = $urlArray[0];
-// 	array_shift($urlArray);
-// 	$action = $urlArray[0];
-// 	array_shift($urlArray);
-// 	$queryString = $urlArray;
-
-// 	$controllerName = $controller;
-// 	$controller = ucwords($controller);
-// 	$model = rtrim($controller, 's');
-// 	$controller .= 'Controller';
-// 	$dispatch = new $controller($model,$controllerName,$action);
-
-// 	if ((int)method_exists($controller, $action)) {
-// 		call_user_func_array(array($dispatch,$action),$queryString);
-// 	} else {
-// 		/* Error Generation Code Here */
-// 	}
-// }
-
-
 function callHook() {
 	global $url;
 	global $uri;
@@ -95,12 +67,21 @@ function callHook() {
 	$model = ucwords($controller);
 	$controller = $model . "Controller";
 
-	$dispatch = new $controller($model, $controllerName, $action);
+	if (class_exists($controller)) {
+		$dispatch = new $controller($model, $controllerName, $action);
+	}
+	else {
+		http_response_code(404);
+		header("Location: " . explode($url, $uri["path"])[0] . "error404");
+		die();
+	}
 
 	if ((int)method_exists($controller, $action)) {
 		call_user_func_array(array($dispatch,$action),$query);
 	} else {
-		/* Error Generation Code Here */
+		http_response_code(404);
+		header("Location: " . explode($url, $uri["path"])[0] . "error404");
+		die();
 	}
 }
 
