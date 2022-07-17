@@ -34,7 +34,7 @@ class BooklistController extends Controller {
 		$this->set('description', 'List of book');
 
 		if ($user_id == null) $user_id = 2;
-        if ($name == null) $name = "Returned";
+        if ($name == null) $name = "Borrowing";
 
 		/** Initialize value to pass to views **/
 		$booklist_names = array();
