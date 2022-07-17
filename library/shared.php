@@ -1,8 +1,22 @@
 <?php
 
+/** Raise 404 error page when get an invalid URL **/
+function raiseError404() {
+    $error = error_get_last();
+
+    // Fatal error, E_ERROR === 1
+    if ($error != null and $error['type'] === E_ERROR) {
+		http_response_code(404);
+		if (DEVELOPMENT_ENVIRONMENT == false) {
+			ob_end_clean();
+		}
+		$dispatch = new Error404Controller("Error404", "error404", "view");
+
+    }
+}
+register_shutdown_function('raiseError404');
 
 /** Check if environment is development and display errors **/
-
 function setReporting() {
 if (DEVELOPMENT_ENVIRONMENT == true) {
 	error_reporting(E_ALL);
@@ -16,14 +30,12 @@ if (DEVELOPMENT_ENVIRONMENT == true) {
 }
 
 /** Check for Magic Quotes and remove them **/
-
 function stripSlashesDeep($value) {
 	$value = is_array($value) ? array_map('stripSlashesDeep', $value) : stripslashes($value);
 	return $value;
 }
 
 /** Check register globals and remove them **/
-
 function unregisterGlobals() {
     if (ini_get('register_globals')) {
         $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
@@ -54,6 +66,9 @@ function callHook() {
 		}	
 	}
 
+	/** Define homepage URL **/
+	define('HOME', explode($url . 'suffix', $uri["path"] . 'suffix')[0]);
+
 	/** Remove empty string at end of $urlArray **/
 	if (end($urlArray) == "") {
 		array_pop($urlArray);
@@ -67,22 +82,9 @@ function callHook() {
 	$model = ucwords($controller);
 	$controller = $model . "Controller";
 
-	if (class_exists($controller)) {
-		$dispatch = new $controller($model, $controllerName, $action);
-	}
-	else {
-		http_response_code(404);
-		header("Location: " . explode($url, $uri["path"])[0] . "error404");
-		die();
-	}
+	$dispatch = new $controller($model, $controllerName, $action);
 
-	if ((int)method_exists($controller, $action)) {
-		call_user_func_array(array($dispatch,$action),$query);
-	} else {
-		http_response_code(404);
-		header("Location: " . explode($url, $uri["path"])[0] . "error404");
-		die();
-	}
+	call_user_func_array(array($dispatch,$action),$query);
 }
 
 /** Autoload any classes that are required **/

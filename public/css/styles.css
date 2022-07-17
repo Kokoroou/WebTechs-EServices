@@ -10,9 +10,11 @@ body {
 
 body { 
     margin: 0;
+    /* width: 100%; */
     height: 100vh;
     display: flex; 
-    flex-direction: column; 
+    flex-direction: column;
+    overflow-y: scroll; 
 }
 
 header{ 
@@ -68,7 +70,7 @@ footer .right {
 
 
 
-.item {
+/* .item {
     width: 400px;
 }
 
@@ -88,27 +90,17 @@ a, td, th {
     font-weight: normal;
     line-height: 1.2em;
     text-decoration: none;
-}
-
-a:hover {
-    background-color: #BCFC3D;
-}
-
-/* h1 {
-    color: #000000;
-    font-size: 41px;
-    letter-spacing: -2px;
-    line-height: 1em;
-    font-family: helvetica,arial,sans-serif;
-    border-bottom: 1px dotted #cccccc;
-    text-align: center;
 } */
 
 div {
     text-align: center;
 }
 
-table {
+a {
+    text-decoration: none;
+}
+
+/* table {
     margin-left: auto;
     margin-right: auto;
-}
+} */

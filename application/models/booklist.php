@@ -11,10 +11,12 @@ class Booklist extends Model {
         $this->_table3 = "book.book";
 	}
 
-    function selectBookID($user_id, $name) {
-        if ($user_id == null) $user_id = 2;
-        if ($name == null) $name = "Returned";
+    function selectBooklistName($user_id) {
+        $query = 'select name from `' . $this->_table1 . '` where user_id = ' . $user_id . ';';
+        return $this->query($query);
+    }
 
+    function selectBookID($user_id, $name) {
         $query = 'select booklist_id from `' . $this->_table1 . '` where user_id = ' . $user_id . ' and name = "' . $name . '";';
         return $this->query($query);
     }
