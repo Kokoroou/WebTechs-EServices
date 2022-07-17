@@ -14,6 +14,8 @@
     <meta property="og:url" content=<?php print (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
                                     . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"?>>
 
+    <base href=<?php print HOME;?>>
+
     <script type="text/javascript">
         function set_title(title) {
           document.getElementsByTagName("title")[0].innerHTML = title;
@@ -25,8 +27,8 @@
           document.querySelector('[property="og:description"]').content = description;
         }
 
-        set_title("E-library");
-        set_description("A place where you find some of your favorite books");
+        set_title("<?php print ($title != null) ? $title : "E-library";?>");
+        set_description("<?php print ($description != null) ? $description : "A place where you find some of your favorite books";?>");
     </script>
 
     <link rel="stylesheet" href="./public/css/styles.css" type="text/css">
@@ -37,7 +39,9 @@
   <header>
 		<div class="container">
 			<span class="left">
-				<h1>E-library</h1>
+				<a href="./">
+          <img src="./public/img/global/logo.png" alt="Logo" height="50px">
+        </a>
 			</span>
 
 			<img src="./public/img/user/default.png" alt="User's Avatar" class="right avatar">
@@ -53,5 +57,3 @@
   <nav></nav>
 
 	<article>
-    <section></section>
-    <section></section>
