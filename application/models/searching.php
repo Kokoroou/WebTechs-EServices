@@ -10,12 +10,27 @@ class Searching extends Model {
 	}
 
     function searchBookIDByTitle($title) {
+        $book_ids = array();
+
         $query = 'select book_id from `' . $this->_table1 . '` where title like "%' . $title . '%";';
-        return $this->query($query);
+
+        $objects = $this->query($query);
+
+        foreach ($objects as $object) {
+			$book_id = $object["Book.book"]["book_id"];
+			array_push($book_ids, $book_id);
+		}
+
+        return $book_ids;
     }
 
     function selectTitleByBookID($book_id) {
         $query = 'select title from `' . $this->_table1 . '` where book_id = ' . $book_id . ';';
-        return $this->query($query);
+
+        $object = $this->query($query);
+
+        $title = $object[0]["Book.book"]["title"];
+
+        return $title;
     }
 }

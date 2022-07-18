@@ -7,13 +7,6 @@
 		$label = preg_replace('/(?<=[a-z])[A-Z]|[A-Z](?=[a-z])/', ' $0', $booklist_name);
 		print "<a href=" . $href . " class=" . $class . ">" . $label . "</a>";
 	}
-	function show_book($book_id, $book_title) {
-		$img_folder = './public/img/book/fullsize/';
-		$img_extension = '.jpg';
-		
-		print "<div class='image'><a href=''><img src='" . $img_folder . strval($book_id) . $img_extension . "' alt='" . $book_title . " Cover'></a></div>";
-		print "<div class='title title-text'><h2 class='h2_anime_title'><a href='' class='link-title'>" . $book_title . "</a></h2></div>";
-	}
 ?>
 
 <div id="list-container" class="list-container">
@@ -38,8 +31,8 @@
 
 				print "<div class='list-item'>";
 
-				print "<div class='data image'><a href='#'><img src='" . $img_folder . strval($book_id) . $img_extension . "' alt='" . $book_title . " Cover'></a></div>";
-				print "<div class='data title'><a href='#' class='link-title'>" . $book_title . "</a></div>";
+				print "<div class='data image'><a href='./book/?book_id=" . strval($book_id) . "'><img src='" . $img_folder . strval($book_id) . $img_extension . "' alt='" . $book_title . " Cover'></a></div>";
+				print "<div class='data title'><a href='./book/?book_id=" . strval($book_id) . "' class='link-title'>" . $book_title . "</a></div>";
 				
 				print "</div>";
 			}

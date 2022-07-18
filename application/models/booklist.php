@@ -12,23 +12,57 @@ class Booklist extends Model {
 	}
 
     function selectBooklistName($user_id) {
+        /** Intialize return variable**/
+        $booklist_names = array();
+
+        /** Main query **/
         $query = 'select name from `' . $this->_table1 . '` where user_id = ' . $user_id . ';';
-        return $this->query($query);
+
+        /** Object return by query **/
+        $objects = $this->query($query);
+
+        /** Edit data to return **/
+        foreach ($objects as $object) {
+			$booklist_name = $object["Booklist.booklist"]["name"];
+			array_push($booklist_names, $booklist_name);
+		}
+
+        return $booklist_names;
     }
 
     function selectBookID($user_id, $name) {
         $query = 'select booklist_id from `' . $this->_table1 . '` where user_id = ' . $user_id . ' and name = "' . $name . '";';
-        return $this->query($query);
+
+        $object = $this->query($query);
+
+        $book_id = $object[0]["Booklist.booklist"]["booklist_id"];
+
+        return $book_id;
     }
 
     function selectBookIDByBooklistID($booklist_id) {
+        $book_ids = array();
+
         $query = 'select book_id from `' . $this->_table2 . '` where booklist_id = ' . $booklist_id . ';';
-        return $this->query($query);
+
+        $objects = $this->query($query);
+
+        foreach ($objects as $object) {
+			$book_id = $object["Booklist.booklist_book"]["book_id"];
+			array_push($book_ids, $book_id);
+		}
+
+        return $book_ids;
     }
 
     function selectTitleByBookID($book_id) {
         $query = 'select title from `' . $this->_table3 . '` where book_id = ' . $book_id . ';';
-        return $this->query($query);
+
+        $object = $this->query($query);
+
+        $title = $object[0]["Book.book"]["title"];
+
+        return $title;
     }
 
 }
