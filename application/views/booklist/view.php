@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="./public/css/booklist.css" type="text/css">
-<!-- <link rel="stylesheet" href="./public/css/booklist1.css" type="text/css"> -->
 
 <?php 
 	function print_status_menu($booklist_name, $name) {
@@ -44,16 +43,6 @@
 				
 				print "</div>";
 			}
-		?>
-	</div>
-
-	<div class="seasonal-anime-list js-seasonal-anime-list js-seasonal-anime-list-key-1">
-		<?php
-			// for ($i = 0; $i < count($book_ids); $i++) {
-			// 	print "<div class='js-anime-category-producer seasonal-anime js-seasonal-anime js-anime-type-all js-anime-type-1'>";
-			// 	show_book($book_ids[$i], $book_titles[$i]);
-			// 	print "</div>";
-			// }
 		?>
 	</div>
 </div>
