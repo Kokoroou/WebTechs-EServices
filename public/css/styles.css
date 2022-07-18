@@ -21,6 +21,7 @@ body {
 }
 
 header{ 
+    background-color: #00000043;
     min-height: 50px;
     overflow: hidden;
     padding: 20px 10px;
@@ -41,10 +42,16 @@ header .right {
     float: right
 }
 
+header .center {
+    margin: 0 auto;
+}
+
 
 footer{ 
+    background-color: #00000043;
     min-height: 50px;
     margin-top: auto;
+    overflow: hidden;
 }
 
 footer .container {

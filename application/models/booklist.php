@@ -5,7 +5,7 @@ class Booklist extends Model {
 
 	function __construct() {
 		$this->connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-		// $this->_model = "Booklist";
+		$this->_model = "Booklist";
 		$this->_table1 = "booklist.booklist";
         $this->_table2 = "booklist.booklist_book";
         $this->_table3 = "book.book";

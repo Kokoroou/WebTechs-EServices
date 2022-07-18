@@ -44,13 +44,19 @@
         </a>
 			</span>
 
-			<img src="./public/img/user/default.png" alt="User's Avatar" class="right avatar">
+      <span class="right">
+        <img src="./public/img/user/default.png" alt="User's Avatar" class="right avatar">
+      </span>
 
-			<span class="right">
-				<form action="./searching/search" method="post">
-					<input type="text" value="Book's name or author..." onclick="this.value=''" name="library"> <input type="submit" value="🔍">
+      <span class="center">
+				<form action="./searching" method="get">
+					<input type="text" value="Book's name..." onclick="this.value=''" name="query"> <input type="submit" value="🔍">
 				</form>
 			</span>
+
+			
+
+			
 		</div>
   </header>
 
