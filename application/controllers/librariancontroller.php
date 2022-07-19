@@ -8,7 +8,12 @@ class LibrarianController extends Controller {
 	}
 
 	function enterBook(){
-
+		$categories = $this->Librarian->selectAllCategories();
+		$publishers = $this->Librarian->selectAllPublishers();
+		$authors = $this->Librarian->selectAllAuthors();
+		$this->set("categories", $categories);
+		$this->set("publishers", $publishers);
+		$this->set("authors", $authors);
 	}
 
 	function insertBook(){

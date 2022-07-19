@@ -22,11 +22,11 @@
             $category=$_POST["category"];
             $publisher=$_POST["publisher"];
 
-            // echo "$isbn<br/>";
-            // echo "$title<br/>";
-            // echo "$author<br/>";
-            // echo "$category<br/>";
-            // echo "$publisher<br/>";
+            echo "$isbn<br/>";
+            echo "$title<br/>";
+            echo "$author<br/>";
+            echo "$category<br/>";
+            echo "$publisher<br/>";
             // $query = "insert into book_info(isbn,title,author,edition,publication) values('$isbn','$title','$author','$edition','$publication')"; //Insert query to add book details into the book_info table
             // $result = mysqli_query($db,$query);
             echo "<b>Book added successfully<b><br/>";
