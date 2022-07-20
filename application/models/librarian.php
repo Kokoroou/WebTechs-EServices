@@ -70,4 +70,74 @@ class Librarian extends Model {
 
         return $authors;
     }
+
+    function selectAllBooksName(){
+        $query = 'select title from `book.book`;';
+        $objects = $this->query($query);
+
+        $titles = array();
+
+        foreach($objects as $idx => $object){
+            array_push($titles, $object["Book.book"]["title"]);
+        }
+
+        return $titles;
+    }
+
+    function getBookByName($name){
+        $query = 'select book_id from `book.book` where title = "' . $name . '";';
+        $object = $this->query($query);
+
+        var_dump($object);
+
+        if ($object){
+            echo "Not empty";
+        }
+        else{
+            echo "Empty";
+        }
+    }
+
+    function checkBookExisted($isbn, $title){
+        $query1 = 'select book_id from `book.book` where isbn = "' . $isbn . '";';
+        $query2 = 'select book_id from `book.book` where title = "' . $title . '";';
+        $object1 = $this->query($query1);
+        $object2 = $this->query($query2);
+
+        if ($object1 || $object2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function checkPublisherExisted($publisher){
+        $query1 = 'select publisher_id from `book.publisher` where name = "' . $publisher . '";';
+        $object1 = $this->query($query1);
+
+        if ($object1){
+            return $object1["Book.publisher"]["publisher_id"];
+        }
+        else{
+            $query2 = 'select max(publisher_id) from `book.publisher`;';
+            $object2 = $this->query($query2);
+            $publisher_id = $object2[0][""]["max(publisher_id)"] + 1;
+
+            $query3 = 'insert into `book.publisher` values (' . $publisher_id . ',' . $publisher . ');';
+            $this->query($query3);
+            
+            return $publisher_id; 
+        }
+    }
+
+    function addNewBook($isbn, $title, $author, $category, $publisher, $copies){
+        $query1 = 'select max(book_id) from `book.book`;';
+        $object1 = $this->query($query1);
+        $book_id = $object1[0][""]["max(book_id)"] + 1;
+        
+        $publisher_id = $this->checkPublisherExisted($publisher);
+        $query2 = 'insert into `book.book` values(' . $book_id . ',' . $isbn . ',' . $title . ',' . $publisher_id . ', curdate(), ' . $copies . ');';
+        $this->query($query2);
+    }
 }
