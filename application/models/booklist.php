@@ -11,33 +11,33 @@ class Booklist extends Model {
         $this->_table3 = "book.book";
 	}
 
-    function selectBooklistName($user_id) {
-        /** Intialize return variable**/
-        $booklist_names = array();
+    function selectBooklistID($user_id) {
+        /** Intialize return variable **/
+        $booklist_ids = array();
 
         /** Main query **/
-        $query = 'select name from `' . $this->_table1 . '` where user_id = ' . $user_id . ';';
+        $query = 'select booklist_id from `' . $this->_table1 . '` where user_id = ' . $user_id . ';';
 
         /** Object return by query **/
         $objects = $this->query($query);
 
         /** Edit data to return **/
         foreach ($objects as $object) {
-			$booklist_name = $object["Booklist.booklist"]["name"];
-			array_push($booklist_names, $booklist_name);
-		}
+            $booklist_id = $object["Booklist.booklist"]["booklist_id"];
+            array_push($booklist_ids, $booklist_id);
+        }
 
-        return $booklist_names;
+        return $booklist_ids;
     }
 
-    function selectBookID($user_id, $name) {
-        $query = 'select booklist_id from `' . $this->_table1 . '` where user_id = ' . $user_id . ' and name = "' . $name . '";';
-
+    function selectBooklistNameByBooklistID($booklist_id) {
+        $query = 'select name from `' . $this->_table1 . '` where booklist_id = ' . $booklist_id . ';';
+        
         $object = $this->query($query);
 
-        $book_id = $object[0]["Booklist.booklist"]["booklist_id"];
+		$booklist_name = $object[0]["Booklist.booklist"]["name"];
 
-        return $book_id;
+        return $booklist_name;
     }
 
     function selectBookIDByBooklistID($booklist_id) {
@@ -63,6 +63,47 @@ class Booklist extends Model {
         $title = $object[0]["Book.book"]["title"];
 
         return $title;
+    }
+
+    /** Check if a booklist_id exists **/
+    function checkBooklistID($booklist_id) {
+        $query = 'select * from `'. $this->_table1 . '` where booklist_id = ' . $booklist_id . ';';
+
+        if ($this->query($query)) return true;
+        else return false;
+    }
+
+    function addBookToBooklist($booklist_id, $book_id) {
+        
+        $query = 'insert into `' . $this->_table2 . '` values (' . strval($booklist_id) . ', ' . strval($book_id) . ');';
+
+        $this->query($query);
+
+        return null;
+    }
+
+    function addBooklist($user_id, $name) {
+        $booklist_id = 1;
+        while ($this->checkBooklistID($booklist_id)) {
+            $booklist_id++;
+        }
+        $date = date("Y-m-d");
+
+        $query = 'insert into `' . $this->_table1 . '` values (' . strval($booklist_id) . ', "' . $name . '", ' . strval($user_id) . ', "' . $date .'");';
+
+        $this->query($query);
+
+        return null;
+    }
+
+    function deleteBooklist($user_id, $booklist_id) {
+        $query1 = 'delete from `' . $this->_table2 . '` where booklist_id = ' . $booklist_id . ';'; 
+        $query2 = 'delete from `' . $this->_table1 . '` where booklist_id = ' . $booklist_id . ';';
+
+        $this->query($query1);
+        $this->query($query2);
+
+        return null;
     }
 
 }
