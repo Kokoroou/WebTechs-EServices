@@ -2,23 +2,20 @@
 <html>
 <body>
     <center><h2>ADD A BOOK</h2></center>
-    <center><h3>All fields are required</h3></center>
-    <!--Once the form is submitted, all the form data is forwarded to InsertBooks.php -->
     <form action="./librarian/insertBook" method="post">
- 
         <table border="2" align="center" cellpadding="5" cellspacing="5">
             <tr>
-            <td> Enter ISBN:</td>
-            <td> <input type="text" name="isbn"> </td>
+            <td> ISBN:</td>
+            <td> <input type="number" name="isbn" min="1" oninput="validity.valid||(value='');" required placeholder="only number"> </td>
             </tr>
             <tr>
-            <td> Enter Title:</td>
-            <td> <input type="text" name="title"> </td>
+            <td> Title:</td>
+            <td> <input type="text" name="title" required> </td>
             </tr>
             <tr>
-            <td> Enter Author:</td>
+            <td> Author:</td>
             <td>
-                <input list="authors" name="author">
+                <input list="authors" name="author" required>
                 <datalist id="authors">
                     <?php
                         for($i = 0; $i < count($authors); $i++){
@@ -28,7 +25,7 @@
                 </datalist>
             </tr>
             <tr>
-            <td> Choose Category:</td>
+            <td> Category:</td>
             <td>
                 <select name="category">
                     <?php
@@ -41,9 +38,9 @@
             </td>
             </tr>
             <tr>
-            <td> Enter Publisher: </td>
+            <td> Publisher: </td>
             <td>
-                <input list="publishers" name="publisher">
+                <input list="publishers" name="publisher" required>
                 <datalist id="publishers">
                     <?php
                         for($i = 0; $i < count($publishers); $i++){
@@ -51,6 +48,10 @@
                         }
                     ?>
                 </datalist>
+            </tr>
+            <tr>
+            <td> Number of copies:</td>
+            <td> <input type="number" name="copies" min="1" oninput="validity.valid||(value='');" required placeholder="only number"> </td>
             </tr>
             <tr>
             <td></td>

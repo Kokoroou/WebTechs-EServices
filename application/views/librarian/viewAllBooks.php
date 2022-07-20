@@ -19,8 +19,8 @@
 
 				print "<div class='list-item'>";
 
-				print "<div class='data image'><a href='./book/?book_id=" . strval($book_id) . "'><img src='" . $img_folder . strval($book_id) . $img_extension . "' alt='" . $book_title . " Cover'></a></div>";
-				print "<div class='data title'><a href='./book/?book_id=" . strval($book_id) . "' class='link-title'>" . $book_title . "</a></div>";
+				print "<div class='data image'><img src='" . $img_folder . strval($book_id) . $img_extension . "' alt='" . $book_title . " Cover'></div>";
+				print "<div class='data title'>" . $book_title . "</div>";
 				
 				print "</div>";
 			}
