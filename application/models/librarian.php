@@ -117,7 +117,7 @@ class Librarian extends Model {
         $object1 = $this->query($query1);
 
         if ($object1){
-            return $object1["Book.publisher"]["publisher_id"];
+            return $object1[0]["Book.publisher"]["publisher_id"];
         }
         else{
             $query2 = 'select max(publisher_id) from `book.publisher`;';
@@ -139,5 +139,30 @@ class Librarian extends Model {
         $publisher_id = $this->checkPublisherExisted($publisher);
         $query2 = 'insert into `book.book` values(' . $book_id . ',' . $isbn . ',' . $title . ',' . $publisher_id . ', curdate(), ' . $copies . ');';
         $this->query($query2);
+    }
+
+    function checkBookExistedOnlyTitle($title){
+        $query = 'select book_id from `book.book` where title = "' . $title . '";';
+        $object = $this->query($query);
+
+        if ($object){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function getBookIDByTitle($title){
+        $query = 'select book_id from `book.book` where title = "' . $title . '";';
+        $object = $this->query($query);
+
+        return $object[0]["Book.book"]["book_id"];
+    }
+
+    function deleteBook($title){
+        $book_id = $this->getBookIDByTitle($title);
+        $query = 'delete from `book.book` where book_id = ' . $book_id . ';';
+        $this->query($query);
     }
 }

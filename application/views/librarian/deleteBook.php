@@ -1,11 +1,11 @@
 <center>
 <h1>DELETE BOOK</h1>
-<form action="./librarian/deleted" method="post">
+<form action="./librarian/deleteBook2" method="post">
     <table border="2" align="center" cellpadding="5" cellspacing="5">
         <tr>
         <td> Title:</td>
         <td>
-            <input list="titles" name="title" placeholder="This field is required">
+            <input list="titles" name="title" required>
             <datalist id="titles">
                 <?php
                     for($i = 0; $i < count($titles); $i++){

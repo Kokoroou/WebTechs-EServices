@@ -60,11 +60,13 @@ class LibrarianController extends Controller {
 		$this->set("titles", $titles);
 	}
 
-	function deleted(){
-		$error = false;
-		if (empty($_POST["title"])){
-			$error = true;
+	function deleteBook2(){
+		$title=$_POST["title"];
+		$existed = $this->Librarian->checkBookExistedOnlyTitle($title);
+
+		$this->set("existed", $existed);
+		if ($existed){
+			$this->Librarian->deleteBook($title);
 		}
-		$this->set("error", $error);
 	}
 }
