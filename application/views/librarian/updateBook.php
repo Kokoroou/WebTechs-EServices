@@ -1,11 +1,11 @@
 <center>
-<h1>UPDATE BOOK</h1>
+<h1>UPDATE A BOOK</h1>
 <form action="./librarian/updateBook2" method="post">
     <table border="2" align="center" cellpadding="5" cellspacing="5">
         <tr>
         <td> Title:</td>
         <td>
-            <input list="titles" name="title" placeholder="This field is required">
+            <input list="titles" name="title" required>
             <datalist id="titles">
                 <?php
                     for($i = 0; $i < count($titles); $i++){
@@ -17,7 +17,7 @@
         <tr>
         <td></td>
         <td>
-        <input type="submit" value="NEXT">
+        <input type="submit" value="UPDATE">
         <input type="reset" value="RESET">
         </td>
         </tr>

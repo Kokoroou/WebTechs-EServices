@@ -14,6 +14,6 @@
 <h1>Welcome <?php echo $name ?></h1>
 <a href='./librarian/enterBook'><button>ADD A BOOK</button></a>
 <a href='./librarian/viewAllBooks'><button>VIEW ALL BOOKS</button></a>
-<a href='./librarian/updateBook'><button>UPDATE BOOK</button></a>
-<a href='./librarian/deleteBook'><button>DELETE BOOK</button></a>
+<a href='./librarian/updateBook'><button>UPDATE A BOOK</button></a>
+<a href='./librarian/deleteBook'><button>DELETE A BOOK</button></a>
 </center>

@@ -84,20 +84,6 @@ class Librarian extends Model {
         return $titles;
     }
 
-    function getBookByName($name){
-        $query = 'select book_id from `book.book` where title = "' . $name . '";';
-        $object = $this->query($query);
-
-        var_dump($object);
-
-        if ($object){
-            echo "Not empty";
-        }
-        else{
-            echo "Empty";
-        }
-    }
-
     function checkBookExisted($isbn, $title){
         $query1 = 'select book_id from `book.book` where isbn = "' . $isbn . '";';
         $query2 = 'select book_id from `book.book` where title = "' . $title . '";';
@@ -131,6 +117,44 @@ class Librarian extends Model {
         }
     }
 
+    function addCategory($category){
+        $query1 = 'select category_id from `book.category` where name = "' . $category . '";';
+        $object1 = $this->query($query1);
+
+        if ($object1){
+            return $object1[0]["Book.category"]["category_id"];
+        }
+        else{
+            $query2 = 'select max(category_id) from `book.category`;';
+            $object2 = $this->query($query2);
+            $category_id = $object2[0][""]["max(category_id)"] + 1;
+
+            $query3 = 'insert into `book.category` values(' . $category_id . ',"' . $category . '");';
+            $this->query($query3);
+
+            return $category_id;
+        }
+    }
+
+    function addAuthor($author){
+        $query1 = 'select author_id from `book.author` where first_name = "' . $author . '";';
+        $object1 = $this->query($query1);
+        
+        if ($object1){
+            return $object1[0]["Book.author"]["author_id"];
+        }
+        else{
+            $query2 = 'select max(author_id) from `book.author`;';
+            $object2 = $this->query($query2);
+            $author_id = $object2[0][""]["max(author_id)"] + 1;
+
+            $query3 = 'insert into `book.author` values(' . $author_id . ',' . $author . ', NULL, NULL);';
+            $this->query($query3);
+
+            return $author_id;
+        }
+    }
+
     function addNewBook($isbn, $title, $author, $category, $publisher, $copies){
         $query1 = 'select max(book_id) from `book.book`;';
         $object1 = $this->query($query1);
@@ -139,6 +163,17 @@ class Librarian extends Model {
         $publisher_id = $this->checkPublisherExisted($publisher);
         $query2 = 'insert into `book.book` values(' . $book_id . ',' . $isbn . ',' . $title . ',' . $publisher_id . ', curdate(), ' . $copies . ');';
         $this->query($query2);
+
+        $query3 = 'insert into `book.popular` values(' . $book_id . ',0);';
+        $this->query($query3);
+
+        $category_id = $this->addCategory($category);
+        $query4 = 'insert into `book.book_category` values(' . $book_id . ',' . $category_id . ');';
+        $this->query($query4);
+
+        $author_id = $this->addAuthor($author);
+        $query5 = 'insert into `book.book_author` values(' . $book_id . ',' . $author_id . ');';
+        $this->query($query5);
     }
 
     function checkBookExistedOnlyTitle($title){
@@ -162,7 +197,53 @@ class Librarian extends Model {
 
     function deleteBook($title){
         $book_id = $this->getBookIDByTitle($title);
+        $query1 = 'delete from `book.popular` where book_id = ' . $book_id . ';';
+        $this->query($query1);
+
+        $query2 = 'delete from `book.book_author` where book_id = ' . $book_id . ';';
+        $this->query($query2);
+
+        $query3 = 'delete from `book.book_category` where book_id = ' . $book_id . ';';
+        $this->query($query3);
+
         $query = 'delete from `book.book` where book_id = ' . $book_id . ';';
         $this->query($query);
+    }
+
+    function getAuthorNameByBookID($book_id){
+        $query = 'select first_name from `book.author` as a, `book.book_author` as b where a.author_id = b.author_id and b.book_id = ' . $book_id . ';';
+        $object = $this->query($query);
+
+        return $object[0]["A"]["first_name"];
+    }
+
+    function getCategoryByBookID($book_id){
+        $query = 'select name from `book.category` as a, `book.book_category` as b where a.category_id = b.category_id and b.book_id = ' . $book_id . ';';
+        $object = $this->query($query);
+
+        return $object[0]["A"]["name"];
+    }
+
+    function getPublisherByBookID($book_id){
+        $query = 'select name from `book.publisher` as a, `book.book` as b where a.publisher_id = b.publisher_id and b.book_id = ' . $book_id . ';';
+        $object = $this->query($query);
+
+        return $object[0]["A"]["name"];
+    }
+
+    function getInfoByTitle($title){
+        $book_id = $this->getBookIDByTitle($title);
+        $query = 'select isbn, publisher_id, number_of_copies from `book.book`where book_id = ' . $book_id . ';';
+        $object = $this->query($query);
+
+        $isbn = $object[0]["Book.book"]["isbn"];
+        $publisher_id = $object[0]["Book.book"]["publisher_id"];
+        $copies = $object[0]["Book.book"]["number_of_copies"];
+
+        $author = $this->getAuthorNameByBookID($book_id);
+        $category = $this->getCategoryByBookID($book_id);
+        $publisher = $this->getPublisherByBookID($book_id);
+
+        return array($isbn, $author, $category, $publisher, $copies);
     }
 }

@@ -1,5 +1,5 @@
 <center>
-<h1>DELETE BOOK</h1>
+<h1>DELETE A BOOK</h1>
 <form action="./librarian/deleteBook2" method="post">
     <table border="2" align="center" cellpadding="5" cellspacing="5">
         <tr>
