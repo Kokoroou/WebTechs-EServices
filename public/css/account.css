@@ -19,6 +19,8 @@
     margin: auto;
     border-radius: 3px;
     background-color: white;
+
+    color: #000000;
   }
 
   .reset-password-box {
@@ -57,7 +59,7 @@
     border-radius: 6px;
     outline: none;
   }
-  input[type="button"] {
+  input[type="submit"] {
     width: 320px;
     height: 35px;
     margin-top: 20px;

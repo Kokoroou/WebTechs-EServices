@@ -2,9 +2,11 @@
 
 class BooklistController extends Controller {
 
-	function view($user_id = 2, $name = "Borrowing") {
+	function view($user_id = null, $name = "Borrowing") {
 		$this->set('title', 'Booklist');
 		$this->set('description', 'List of book');
+
+		if ($user_id == null) $user_id = $_SESSION["user_id"];
 
 		/** Initialize value to pass to views **/
 		$booklist_names = array();
@@ -39,10 +41,8 @@ class BooklistController extends Controller {
 	}
 	
 	function addBook($book_id = 0) {
-		$user_id = 2;
-
 		$book_title = $this->Booklist->selectTitleByBookID($book_id);
-		$booklist_ids = $this->Booklist->selectBooklistID($user_id);
+		$booklist_ids = $this->Booklist->selectBooklistID();
 		$booklist_names = array();
 
 		foreach ($booklist_ids as $booklist_id) {
@@ -72,15 +72,13 @@ class BooklistController extends Controller {
 	function delete() {
 		$this->set('title','Delete Booklist');
 		$this->set('description', 'Delete a personal Booklist');
-		
-		$user_id = 2;
 
 		if (isset($_POST["booklist_id"])) {
-			$this->Booklist->deleteBooklist($user_id, $_POST["booklist_id"]);
+			$this->Booklist->deleteBooklist($_POST["booklist_id"]);
 			$this->set("status", 1);
 		}
 		else {
-			$booklist_ids = $this->Booklist->selectBooklistID($user_id);
+			$booklist_ids = $this->Booklist->selectBooklistID();
 			$booklist_names = array();
 
 			foreach ($booklist_ids as $booklist_id) {
@@ -99,10 +97,8 @@ class BooklistController extends Controller {
 		$this->set('title', 'Add Booklist');
 		$this->set('description', 'Add a personal Booklist');
 
-		$user_id = 2;
-
 		if (isset($_POST["name"])) {
-			$this->Booklist->addBooklist($user_id, $_POST["name"]);
+			$this->Booklist->addBooklist($_POST["name"]);
 			$this->set("status", 1);
 		}
 		else {

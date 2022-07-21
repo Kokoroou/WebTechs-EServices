@@ -37,7 +37,7 @@ CREATE TABLE `book.author` (
 
 LOCK TABLES `book.author` WRITE;
 /*!40000 ALTER TABLE `book.author` DISABLE KEYS */;
-INSERT INTO `book.author` VALUES (1,'Tooru',NULL,' Fujisawa'),(2,'Sou',NULL,'Yayoi'),(3,'HERO',NULL,NULL),(4,'Satoshi',NULL,'Mizukami'),(5,'Naoshi',NULL,'Komi'),(6,'Tamiki',NULL,'Wakaki');
+INSERT INTO `book.author` VALUES (0,'Unknown',NULL,NULL),(1,'Tooru',NULL,' Fujisawa'),(2,'Sou',NULL,'Yayoi'),(3,'HERO',NULL,NULL),(4,'Satoshi',NULL,'Mizukami'),(5,'Naoshi',NULL,'Komi'),(6,'Tamiki',NULL,'Wakaki');
 /*!40000 ALTER TABLE `book.author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `book.book` (
 
 LOCK TABLES `book.book` WRITE;
 /*!40000 ALTER TABLE `book.book` DISABLE KEYS */;
-INSERT INTO `book.book` VALUES (1,'9784063124118','Great Teacher Onizuka',1,'2022-07-09',5),(2,'9780316342032','Horimiya',2,'2022-07-14',6),(3,NULL,'ReLIFE',3,'2022-07-18',10),(4,'9781626926011','Spirit Circle',4,'2022-07-18',4),(5,NULL,'Tokidoki',0,'2022-07-18',2),(6,NULL,'The World God Only Knows',0,'2022-07-18',10);
+INSERT INTO `book.book` VALUES (0,'0','None',0,'2022-07-01',0),(1,'9784063124118','Great Teacher Onizuka',1,'2022-07-09',5),(2,'9780316342032','Horimiya',2,'2022-07-14',6),(3,NULL,'ReLIFE',3,'2022-07-18',10),(4,'9781626926011','Spirit Circle',4,'2022-07-18',4),(5,NULL,'Tokidoki',0,'2022-07-18',2),(6,NULL,'The World God Only Knows',0,'2022-07-18',10);
 /*!40000 ALTER TABLE `book.book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `book.book_author` (
 
 LOCK TABLES `book.book_author` WRITE;
 /*!40000 ALTER TABLE `book.book_author` DISABLE KEYS */;
-INSERT INTO `book.book_author` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6);
+INSERT INTO `book.book_author` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(0,0);
 /*!40000 ALTER TABLE `book.book_author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,7 @@ CREATE TABLE `book.book_category` (
 
 LOCK TABLES `book.book_category` WRITE;
 /*!40000 ALTER TABLE `book.book_category` DISABLE KEYS */;
-INSERT INTO `book.book_category` VALUES (1,1),(1,2),(1,3),(2,4),(3,2),(3,3),(3,4),(3,5),(4,1),(4,2),(4,3),(4,4),(4,6),(4,7),(5,3),(5,4),(6,2),(6,4),(6,7),(6,8);
+INSERT INTO `book.book_category` VALUES (1,1),(1,2),(1,3),(2,4),(3,2),(3,3),(3,4),(3,5),(4,1),(4,2),(4,3),(4,4),(4,6),(4,7),(5,3),(5,4),(6,2),(6,4),(6,7),(6,8),(0,0);
 /*!40000 ALTER TABLE `book.book_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `book.category` (
 
 LOCK TABLES `book.category` WRITE;
 /*!40000 ALTER TABLE `book.category` DISABLE KEYS */;
-INSERT INTO `book.category` VALUES (1,'Action'),(2,'Comedy'),(3,'Drama'),(4,'Romance'),(5,'Slice of Life'),(6,'Adventure'),(7,'Supernatural'),(8,'Fantasy');
+INSERT INTO `book.category` VALUES (0,'Unknown'),(1,'Action'),(2,'Comedy'),(3,'Drama'),(4,'Romance'),(5,'Slice of Life'),(6,'Adventure'),(7,'Supernatural'),(8,'Fantasy');
 /*!40000 ALTER TABLE `book.category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ CREATE TABLE `book.popular` (
 
 LOCK TABLES `book.popular` WRITE;
 /*!40000 ALTER TABLE `book.popular` DISABLE KEYS */;
-INSERT INTO `book.popular` VALUES (1,0),(2,0),(3,0),(4,0),(5,0),(6,0);
+INSERT INTO `book.popular` VALUES (1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(0,0);
 /*!40000 ALTER TABLE `book.popular` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,7 +249,7 @@ CREATE TABLE `booklist.booklist_book` (
 
 LOCK TABLES `booklist.booklist_book` WRITE;
 /*!40000 ALTER TABLE `booklist.booklist_book` DISABLE KEYS */;
-INSERT INTO `booklist.booklist_book` VALUES (1,1),(1,2),(3,3),(3,4),(3,5),(3,6);
+INSERT INTO `booklist.booklist_book` VALUES (1,1),(1,2),(3,3),(3,4),(3,5),(2,6),(6,4),(6,2),(4,3);
 /*!40000 ALTER TABLE `booklist.booklist_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -386,7 +386,7 @@ CREATE TABLE `user.password` (
 
 LOCK TABLES `user.password` WRITE;
 /*!40000 ALTER TABLE `user.password` DISABLE KEYS */;
-INSERT INTO `user.password` VALUES (1,'123456',NULL,'2022-07-13 00:00:00'),(2,'123456',NULL,'2022-07-13 00:00:00');
+INSERT INTO `user.password` VALUES (1,'e10adc3949ba59abbe56e057f20f883e',NULL,'2022-07-13 00:00:00'),(2,'e10adc3949ba59abbe56e057f20f883e',NULL,'2022-07-13 00:00:00');
 /*!40000 ALTER TABLE `user.password` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,7 +437,7 @@ CREATE TABLE `user.user` (
 
 LOCK TABLES `user.user` WRITE;
 /*!40000 ALTER TABLE `user.user` DISABLE KEYS */;
-INSERT INTO `user.user` VALUES (1,'Kokoroou','2022-07-09 00:00:00'),(2,'Shadow','2022-07-13 00:00:00');
+INSERT INTO `user.user` VALUES (0,'None','2022-07-01 00:00:00'),(1,'Kokoroou','2022-07-09 00:00:00'),(2,'Shadow','2022-07-13 00:00:00');
 /*!40000 ALTER TABLE `user.user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -450,4 +450,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-18  0:58:36
+-- Dump completed on 2022-07-21  9:57:59

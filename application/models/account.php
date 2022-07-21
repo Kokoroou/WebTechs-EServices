@@ -14,5 +14,62 @@ class Account extends Model {
         $this->_table6 = "user.password";
 	}
 
-    
+    function selectUsernameByUserID($user_id) {
+        $query = 'select account_name from `' . $this->_table1 . '` where user_id = ' . $user_id . ';';
+        
+        $object = $this->query($query);
+
+		$username = $object[0]["User.user"]["account_name"];
+
+        return $username;
+    }
+
+    function selectName() {
+        $user_id = $_SESSION["user_id"];
+        $name = "";
+
+        $query1 = 'select * from `' . $this->_table2 . '` where librarian_id = ' . $user_id . ';';
+        $query2 = 'select * from `' . $this->_table3 . '` where member_id = ' . $user_id . ';';
+
+        if ($this->query($query1)) {
+            $query = 'select concat(coalesce(concat(last_name, " "), ""), coalesce(concat(middle_name, " "), ""), coalesce(first_name)) as name from `' . $this->_table2 . '` where librarian_id = ' . $user_id . ';';
+            
+            $object = $this->query($query);
+            
+            $name = $object[0][""]["name"];
+        }
+        else if ($this->query($query2)) {
+            $query = 'select concat(coalesce(concat(last_name, " "), ""), coalesce(concat(middle_name, " "), ""), coalesce(first_name)) as name from `' . $this->_table3 . '` where member_id = ' . $user_id . ';';
+            
+            $object = $this->query($query);
+            
+            $name = $object[0][""]["name"];
+        }
+
+        return $name;
+    }
+
+    function selectEmailAddress() {
+        $user_id = $_SESSION["user_id"];
+
+        $query = 'select email_address from `' . $this->_table4 . '` where user_id = ' . $user_id . ';';
+
+        $object = $this->query($query);
+
+        $email = $object[0]["User.email_address"]["email_address"];
+
+        return $email;
+    }
+
+    function selectPhoneNumber() {
+        $user_id = $_SESSION["user_id"];
+
+        $query = 'select phone_number from `' . $this->_table5 . '` where user_id = ' . $user_id . ';';
+
+        $object = $this->query($query);
+
+        $phone_number = $object[0]["User.phone_number"]["phone_number"];
+
+        return $phone_number;
+    }
 }

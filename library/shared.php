@@ -53,6 +53,10 @@ function callHook() {
 	global $url;
 	global $uri;
 
+	/** Start a session **/
+	session_start();
+	error_reporting(0);
+
 	/** Get path from URL **/
 	$urlArray = explode("/",$url);
 	

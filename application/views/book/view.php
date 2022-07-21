@@ -12,13 +12,13 @@
 		?>
 	</div>
 <div class="center_div">
-<input type="submit" value="Add" class ="btn">
+<a href="<?php print './booklist/addBook?book_id=' . $book_id ?>"><input type="submit" value="Add" class ="btn"></a>
 </div>
     </div>
 	<style>
 		.btn {
 			width: 80px;
-			header: 40px;
+			height: 40px;
 			border-radius: #0080FF solid 5px !important;
 			background-color: #0080FF;
 			color: white;

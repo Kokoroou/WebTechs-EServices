@@ -11,7 +11,9 @@ class Booklist extends Model {
         $this->_table3 = "book.book";
 	}
 
-    function selectBooklistID($user_id) {
+    function selectBooklistID($user_id = null) {
+        if ($user_id == null) $user_id = $_SESSION["user_id"];
+
         /** Intialize return variable **/
         $booklist_ids = array();
 
@@ -82,7 +84,9 @@ class Booklist extends Model {
         return null;
     }
 
-    function addBooklist($user_id, $name) {
+    function addBooklist($name) {
+        $user_id = $_SESSION["user_id"];
+
         $booklist_id = 1;
         while ($this->checkBooklistID($booklist_id)) {
             $booklist_id++;
@@ -96,7 +100,7 @@ class Booklist extends Model {
         return null;
     }
 
-    function deleteBooklist($user_id, $booklist_id) {
+    function deleteBooklist($booklist_id) {
         $query1 = 'delete from `' . $this->_table2 . '` where booklist_id = ' . $booklist_id . ';'; 
         $query2 = 'delete from `' . $this->_table1 . '` where booklist_id = ' . $booklist_id . ';';
 
