@@ -9,10 +9,10 @@ class Librarian extends Model {
     }
 
     function printNameByID($librarian_id){
-        $query = 'select first_name from `user.librarian` where librarian_id = ' . $librarian_id . ';';
+        $query = 'select CONCAT(first_name, \' \', last_name) from `user.librarian` where librarian_id = ' . $librarian_id . ';';
         $object = $this->query($query);
 
-        $name = $object[0]["User.librarian"]["first_name"];
+        $name = $object[0][""]["CONCAT(first_name, ' ', last_name)"];
 
         return $name;
     }
@@ -59,13 +59,13 @@ class Librarian extends Model {
     }
 
     function selectAllAuthors(){
-        $query = 'select first_name from `book.author`;';
+        $query = 'select CONCAT(first_name, \' \', last_name) from `book.author`;';
         $objects = $this->query($query);
 
         $authors = array();
 
         foreach($objects as $idx => $object){
-            array_push($authors, $object["Book.author"]["first_name"]);
+            array_push($authors, $object[""]["CONCAT(first_name, ' ', last_name)"]);
         }
 
         return $authors;
@@ -137,7 +137,17 @@ class Librarian extends Model {
     }
 
     function addAuthor($author){
-        $query1 = 'select author_id from `book.author` where first_name = "' . $author . '";';
+        $names = explode(' ', $author);
+        
+        if (count($names) != 1){
+            $first_name = $names[0];
+            $last_name = $names[1];
+        }
+        else{
+            $first_name = $author;
+            $last_name = "";
+        }
+        $query1 = 'select author_id from `book.author` where first_name = "' . $first_name . '" and last_name = "' . $last_name . '";';
         $object1 = $this->query($query1);
         
         if ($object1){
@@ -148,7 +158,7 @@ class Librarian extends Model {
             $object2 = $this->query($query2);
             $author_id = $object2[0][""]["max(author_id)"] + 1;
 
-            $query3 = 'insert into `book.author` values(' . $author_id . ',' . $author . ', NULL, NULL);';
+            $query3 = 'insert into `book.author` values(' . $author_id . ',"' . $first_name . '",NULL,"' . $last_name . '");';
             $this->query($query3);
 
             return $author_id;
@@ -211,10 +221,10 @@ class Librarian extends Model {
     }
 
     function getAuthorNameByBookID($book_id){
-        $query = 'select first_name from `book.author` as a, `book.book_author` as b where a.author_id = b.author_id and b.book_id = ' . $book_id . ';';
+        $query = 'select CONCAT(first_name, \' \', last_name) from `book.author` as a, `book.book_author` as b where a.author_id = b.author_id and b.book_id = ' . $book_id . ';';
         $object = $this->query($query);
 
-        return $object[0]["A"]["first_name"];
+        return $object[0][""]["CONCAT(first_name, ' ', last_name)"];
     }
 
     function getCategoryByBookID($book_id){
