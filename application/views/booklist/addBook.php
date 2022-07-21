@@ -3,6 +3,7 @@
 <?php
 	if ($status == 0) {
 		print '
+		<center>
 		<div class="form-container">
 			<div class="form-header">Add Book to My Booklist</div>
 			<div class="form-notice">* Your list is public by default</div>		
@@ -37,10 +38,12 @@
 				<input type="submit" form="main-form" value="Submit">
 			</div>
 		</div>
+		</center>
 		';
 	}
 	elseif ($status == 1) {
 		print '
+		<center>
 		<div class="notice-container">
 			<div class="notice">
 				Successfully added book to your booklist
@@ -55,6 +58,7 @@
 				<a class="button" href="./booklist">Go to booklist</a>
 			</div>
 		</div>
+		</center>
 		';
 	}
 

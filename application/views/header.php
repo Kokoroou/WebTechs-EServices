@@ -32,7 +32,22 @@
 						<img src="' . getAvatarPath() . '" alt="User\'s Avatar" class="right avatar">
 					</a>
 					</span>
+
+					<span class="right">
+					<a href="./booklist/">
+						<img src="./public/img/global/booklist.png" alt="Booklist" class="right avatar">
+					</a>
+					</span>
 				';
+				if ($_SESSION["user_type"] == "librarian") {
+					print '
+					<span class="right">
+					<a href="./librarian/">
+						<img src="./public/img/global/library.png" alt="Library" class="right avatar">
+					</a>
+					</span>
+					';
+				}
 			}
 			else {
 				print '

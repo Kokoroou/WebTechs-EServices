@@ -9,6 +9,8 @@ class Signup extends Model {
         $this->_table2 = "user.email_address";
         $this->_table3 = "user.member";
         $this->_table4 = "user.password";
+        $this->_table5 = "user.phone_number";
+        $this->_table6 = "booklist.booklist";
 	}
 
     function checkUserID($user_id) {
@@ -25,58 +27,82 @@ class Signup extends Model {
         else return false;
     }
 
+    function addName($user_id, $name) {
+        $date = date("Y-m-d");
+        $query = 'insert into `' . $this->_table3 . '` values (' . $user_id . ', "' . $name . '", "", "");';
+
+        return $this->query($query);
+    }
+
     function addEmail($user_id, $email) {
         $date = date("Y-m-d");
         $query = 'insert into `' . $this->_table2 . '` values (' . $user_id . ', "' . $email . '", "' . $date . '");';
 
         return $this->query($query);
     }
-    function addPassword($user_id, $password) {
+
+    function addPhoneNumber($user_id, $phone_number) {
         $date = date("Y-m-d");
-        $query = 'insert into `' . $this->_table4 . '` values (' . $user_id . ', "' . $password . '", "", ' . $date . '");';
+        $query = 'insert into `' . $this->_table5 . '` values (' . $user_id . ', "' . $phone_number . '", "' . $date . '");';
 
         return $this->query($query);
     }
 
-    
-// include 'config.php';
-// error_reporting(0);
+    function addPassword($user_id, $password) {
+        $date = date("Y-m-d");
+        $query = 'insert into `' . $this->_table4 . '` values (' . $user_id . ', "' . $password . '", "", "' . $date . '");';
 
-// session_start();
+        return $this->query($query);
+    }
 
-// if (isset($_SESSION['username'])) {
-//     header("Location: index.php");
-// }
+    function addUser($username) {
+        $user_id = 1;
+        while ($this->checkUserID($user_id)) {
+            $user_id++;
+        }
+        $date = date("Y-m-d");
 
-// if (isset($_POST['submit'])) {
-// 	$username = $_POST['username'];
-// 	$email = $_POST['email'];
-// 	$password = md5($_POST['password']);
-// 	$cpassword = md5($_POST['cpassword']);
+        $query = 'insert into `' . $this->_table1 . '` values (' . $user_id . ', "' . $username . '", "' . $date .'");';
 
-// 	if ($password == $cpassword) {
-// 		$sql = "select * from `" . $this->_table2 . "` where email='" . $email . "'";
-//         $this->query($sql);
-// 		if (!$result->num_rows > 0) {
-// 			$sql = "insert into `" . $this->_table2 . "` (user_id, email_address, modified_date)
-// 					values ('" . $username"', '$email', '$password')";
-// 			 $this->query($sql);
-// 			if ($result) {
-// 				echo "<script>alert('Wow! User Registration Completed.')</script>";
-// 				$username = "";
-// 				$email = "";
-// 				$_POST['password'] = "";
-// 				$_POST['cpassword'] = "";
-// 			} else {
-// 				echo "<script>alert('Woops! Something Wrong Went.')</script>";
-// 			}
-// 		} else {
-// 			echo "<script>alert('Woops! Email Already Exists.')</script>";
-// 		}
-		
-// 	} else {
-// 		echo "<script>alert('Password Not Matched.')</script>";
-// 	}
-// }
+        $this->query($query);
+
+        return $user_id;
+    }
+
+    function checkBooklistID($booklist_id) {
+        $query = 'select * from `' . $this->_table6 . '` where booklist_id = ' . strval($booklist_id) . ';';
+
+        if ($this->query($query)) return true;
+        else return false;
+    }
+
+    function addBooklist($user_id) {
+        $date = date("Y-m-d");
+
+        $booklist_id = 1;
+        while ($this->checkBooklistID($booklist_id)) {
+            $booklist_id++;
+        }
+
+        $query1 = 'insert into `' . $this->_table6 . '` values (' . $booklist_id++ . ', "Returned", ' . $user_id . ', "' . $date .'");';
+
+        while ($this->checkBooklistID($booklist_id)) {
+            $booklist_id++;
+        }
+
+        $query2 = 'insert into `' . $this->_table6 . '` values (' . $booklist_id++ . ', "Borrowing", ' . $user_id . ', "' . $date .'");';
+
+        while ($this->checkBooklistID($booklist_id)) {
+            $booklist_id++;
+        }
+
+        $query3 = 'insert into `' . $this->_table6 . '` values (' . $booklist_id++ . ', "PlanToBorrow", ' . $user_id . ', "' . $date .'");';
+
+        $this->query($query1);
+        $this->query($query2);
+        $this->query($query3);
+
+        return $user_id;
+    }
+
 }
-?>

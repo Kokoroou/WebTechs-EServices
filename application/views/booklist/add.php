@@ -3,6 +3,7 @@
 <?php
     if ($status == 0) {
         print '
+        <center>
         <div class="form-container">
 	        <div class="form-header">Add Booklist</div>	
             <div class="form-data">
@@ -21,10 +22,12 @@
                 <input type="submit" form="main-form" value="Submit">
             </div>
         </div>
+        </center>
         ';
     }
     elseif ($status == 1) {
         print '
+        <center>
             <div class="notice-container">
                 <div class="notice-data">Successfully add booklist</div>
                 <div class="button-container">
@@ -32,6 +35,7 @@
                     <a href="./booklist"><button>Go to booklist</button></a>
                 </div>
             </div>
+        </center>
         ';
     }
 ?>

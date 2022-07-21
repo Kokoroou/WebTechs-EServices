@@ -17,6 +17,8 @@
 					print_status_menu($booklist_name, $name);
 				}
 			?>
+			<a href="./booklist/add" class="status-button">Add Booklist</a>
+			<a href="./booklist/delete" class="status-button">Delete Booklist</a>
 		</div>
 		
 	</div>

@@ -11,6 +11,10 @@
     margin: auto;
     background-color: white;
     border-radius: 3px;
+
+    overflow: scroll;
+
+    color: #000000;
   }
   
   .login-box {
@@ -27,7 +31,7 @@
     width: 360px;
     height: 360px;
     margin: auto;
-    background-color: white;
+    /* background-color: white; */
     border-radius: 3px;
   }
   

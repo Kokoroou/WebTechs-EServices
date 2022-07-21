@@ -72,4 +72,19 @@ class Account extends Model {
 
         return $phone_number;
     }
+
+    function editInfo($name, $email, $phone_number) {
+        $user_id = $_SESSION["user_id"];
+        $date = date("Y-m-d");
+
+        $query1 = 'update `' . $this->_table3 . '` set first_name = "' . $name . '" where user_id = ' . $user_id . ';';
+        $query2 = 'update `' . $this->_table4 . '` set email_address = "' . $email . '", modified_date = "' . $date . '" where user_id = ' . $user_id . ';';
+        $query3 = 'update `' . $this->_table5 . '` set phone_number = "' . $phone_number . '", modified_date = "' . $date . '" where user_id = ' . $user_id . ';';
+
+        $this->query($query1);
+        $this->query($query2);
+        $this->query($query3);
+        
+        return null;
+    }
 }
