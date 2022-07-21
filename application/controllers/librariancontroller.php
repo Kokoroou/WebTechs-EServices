@@ -3,7 +3,7 @@
 class LibrarianController extends Controller {
 
 	function view() {
-		$name = $this->Librarian->printNameByID(1);
+		$name = $this->Librarian->selectName();
 		$this->set("name", $name);
 	}
 
@@ -27,7 +27,9 @@ class LibrarianController extends Controller {
 		$existed = $this->Librarian->checkBookExisted($isbn, $title);
 		$this->set("existed", $existed);
 		if (!$existed){
-			$this->Librarian->addNewBook($isbn, $title, $author, $category, $publisher, $copies);
+			$book_id = $this->Librarian->addNewBook($isbn, $title, $author, $category, $publisher, $copies);
+			$book_dir = ROOT . '\public\img\book\fullsize\\' . $book_id . '.jpg';
+			move_uploaded_file($_FILES['userfile']['tmp_name'], $book_dir);
 		}
 	}
 
@@ -93,10 +95,20 @@ class LibrarianController extends Controller {
 	function deleteBook2(){
 		$title=$_POST["title"];
 		$existed = $this->Librarian->checkBookExistedOnlyTitle($title);
+		$book_id = $this->Librarian->getBookIDByTitle($title);
+		unlink(ROOT . '\public\img\book\fullsize\\' . $book_id . '.jpg');
 
 		$this->set("existed", $existed);
 		if ($existed){
 			$this->Librarian->deleteBook($title);
 		}
+	}
+
+	function test(){
+
+	}
+
+	function test2(){
+
 	}
 }

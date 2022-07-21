@@ -110,7 +110,7 @@ class Librarian extends Model {
             $object2 = $this->query($query2);
             $publisher_id = $object2[0][""]["max(publisher_id)"] + 1;
 
-            $query3 = 'insert into `book.publisher` values (' . $publisher_id . ',' . $publisher . ');';
+            $query3 = 'insert into `book.publisher` values (' . $publisher_id . ',"' . $publisher . '");';
             $this->query($query3);
             
             return $publisher_id; 
@@ -171,7 +171,7 @@ class Librarian extends Model {
         $book_id = $object1[0][""]["max(book_id)"] + 1;
         
         $publisher_id = $this->checkPublisherExisted($publisher);
-        $query2 = 'insert into `book.book` values(' . $book_id . ',' . $isbn . ',' . $title . ',' . $publisher_id . ', curdate(), ' . $copies . ');';
+        $query2 = 'insert into `book.book` values(' . $book_id . ',' . $isbn . ',"' . $title . '",' . $publisher_id . ', curdate(), ' . $copies . ');';
         $this->query($query2);
 
         $query3 = 'insert into `book.popular` values(' . $book_id . ',0);';
@@ -184,6 +184,8 @@ class Librarian extends Model {
         $author_id = $this->addAuthor($author);
         $query5 = 'insert into `book.book_author` values(' . $book_id . ',' . $author_id . ');';
         $this->query($query5);
+
+        return $book_id;
     }
 
     function checkBookExistedOnlyTitle($title){
@@ -255,5 +257,30 @@ class Librarian extends Model {
         $publisher = $this->getPublisherByBookID($book_id);
 
         return array($isbn, $author, $category, $publisher, $copies);
+    }
+
+    function selectName() {
+        $user_id = $_SESSION["user_id"];
+        $name = "";
+
+        $query1 = 'select * from `user.librarian` where librarian_id = ' . $user_id . ';';
+        $query2 = 'select * from `user.member` where member_id = ' . $user_id . ';';
+
+        if ($this->query($query1)) {
+            $query = 'select concat(coalesce(concat(last_name, " "), ""), coalesce(concat(middle_name, " "), ""), coalesce(first_name)) as name from `user.librarian` where librarian_id = ' . $user_id . ';';
+            
+            $object = $this->query($query);
+            
+            $name = $object[0][""]["name"];
+        }
+        else if ($this->query($query2)) {
+            $query = 'select concat(coalesce(concat(last_name, " "), ""), coalesce(concat(middle_name, " "), ""), coalesce(first_name)) as name from `user.member` where member_id = ' . $user_id . ';';
+            
+            $object = $this->query($query);
+            
+            $name = $object[0][""]["name"];
+        }
+
+        return $name;
     }
 }

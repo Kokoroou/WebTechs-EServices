@@ -2,7 +2,7 @@
 <html>
 <body>
     <center><h2>ADD A BOOK</h2></center>
-    <form action="./librarian/insertBook" method="post">
+    <form enctype="multipart/form-data" action="./librarian/insertBook" method="post">
         <table border="2" align="center" cellpadding="5" cellspacing="5">
             <tr>
             <td> ISBN:</td>
@@ -52,6 +52,14 @@
             <tr>
             <td> Number of copies:</td>
             <td> <input type="number" name="copies" min="1" oninput="validity.valid||(value='');" required placeholder="only number"> </td>
+            </tr>
+            <tr>
+            <td>Cover Image:</td>
+            <td>
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+            <!-- Name of input element determines name in $_FILES array -->
+            <input name="userfile" type="file" />
+            </td>
             </tr>
             <tr>
             <td></td>
