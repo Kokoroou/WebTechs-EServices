@@ -27,7 +27,9 @@ class LibrarianController extends Controller {
 		$existed = $this->Librarian->checkBookExisted($isbn, $title);
 		$this->set("existed", $existed);
 		if (!$existed){
-			$this->Librarian->addNewBook($isbn, $title, $author, $category, $publisher, $copies);
+			$book_id = $this->Librarian->addNewBook($isbn, $title, $author, $category, $publisher, $copies);
+			$book_dir = ROOT . '\public\img\book\fullsize\\' . $book_id . '.jpg';
+			move_uploaded_file($_FILES['userfile']['tmp_name'], $book_dir);
 		}
 	}
 
@@ -98,5 +100,13 @@ class LibrarianController extends Controller {
 		if ($existed){
 			$this->Librarian->deleteBook($title);
 		}
+	}
+
+	function test(){
+
+	}
+
+	function test2(){
+
 	}
 }

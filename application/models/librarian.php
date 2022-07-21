@@ -110,7 +110,7 @@ class Librarian extends Model {
             $object2 = $this->query($query2);
             $publisher_id = $object2[0][""]["max(publisher_id)"] + 1;
 
-            $query3 = 'insert into `book.publisher` values (' . $publisher_id . ',' . $publisher . ');';
+            $query3 = 'insert into `book.publisher` values (' . $publisher_id . ',"' . $publisher . '");';
             $this->query($query3);
             
             return $publisher_id; 
@@ -171,7 +171,7 @@ class Librarian extends Model {
         $book_id = $object1[0][""]["max(book_id)"] + 1;
         
         $publisher_id = $this->checkPublisherExisted($publisher);
-        $query2 = 'insert into `book.book` values(' . $book_id . ',' . $isbn . ',' . $title . ',' . $publisher_id . ', curdate(), ' . $copies . ');';
+        $query2 = 'insert into `book.book` values(' . $book_id . ',' . $isbn . ',"' . $title . '",' . $publisher_id . ', curdate(), ' . $copies . ');';
         $this->query($query2);
 
         $query3 = 'insert into `book.popular` values(' . $book_id . ',0);';
@@ -184,6 +184,8 @@ class Librarian extends Model {
         $author_id = $this->addAuthor($author);
         $query5 = 'insert into `book.book_author` values(' . $book_id . ',' . $author_id . ');';
         $this->query($query5);
+
+        return $book_id;
     }
 
     function checkBookExistedOnlyTitle($title){
