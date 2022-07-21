@@ -95,6 +95,8 @@ class LibrarianController extends Controller {
 	function deleteBook2(){
 		$title=$_POST["title"];
 		$existed = $this->Librarian->checkBookExistedOnlyTitle($title);
+		$book_id = $this->Librarian->getBookIDByTitle($title);
+		unlink(ROOT . '\public\img\book\fullsize\\' . $book_id . '.jpg');
 
 		$this->set("existed", $existed);
 		if ($existed){
