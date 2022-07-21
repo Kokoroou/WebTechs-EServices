@@ -138,8 +138,10 @@ class Librarian extends Model {
 
     function addAuthor($author){
         $names = explode(' ', $author);
-        if (is_array($names)){
-            list($first_name, $last_name) = $names;
+        
+        if (count($names) != 1){
+            $first_name = $names[0];
+            $last_name = $names[1];
         }
         else{
             $first_name = $author;
