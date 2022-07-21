@@ -256,4 +256,29 @@ class Librarian extends Model {
 
         return array($isbn, $author, $category, $publisher, $copies);
     }
+
+    function selectName() {
+        $user_id = $_SESSION["user_id"];
+        $name = "";
+
+        $query1 = 'select * from `user.librarian` where librarian_id = ' . $user_id . ';';
+        $query2 = 'select * from `user.member` where member_id = ' . $user_id . ';';
+
+        if ($this->query($query1)) {
+            $query = 'select concat(coalesce(concat(last_name, " "), ""), coalesce(concat(middle_name, " "), ""), coalesce(first_name)) as name from `user.librarian` where librarian_id = ' . $user_id . ';';
+            
+            $object = $this->query($query);
+            
+            $name = $object[0][""]["name"];
+        }
+        else if ($this->query($query2)) {
+            $query = 'select concat(coalesce(concat(last_name, " "), ""), coalesce(concat(middle_name, " "), ""), coalesce(first_name)) as name from `user.member` where member_id = ' . $user_id . ';';
+            
+            $object = $this->query($query);
+            
+            $name = $object[0][""]["name"];
+        }
+
+        return $name;
+    }
 }

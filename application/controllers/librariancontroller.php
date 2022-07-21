@@ -3,7 +3,7 @@
 class LibrarianController extends Controller {
 
 	function view() {
-		$name = $this->Librarian->printNameByID(1);
+		$name = $this->Librarian->selectName();
 		$this->set("name", $name);
 	}
 
