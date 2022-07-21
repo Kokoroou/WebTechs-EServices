@@ -56,7 +56,7 @@
             <tr>
             <td>Cover Image:</td>
             <td>
-            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
             <!-- Name of input element determines name in $_FILES array -->
             <input name="userfile" type="file" />
             </td>
