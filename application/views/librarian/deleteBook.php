@@ -1,7 +1,8 @@
+<link rel="stylesheet" href="./public/css/librarian.css" type="text/css">
 <center>
-<h1>DELETE A BOOK</h1>
+<h2>DELETE A BOOK</h2>
 <form action="./librarian/deleteBook2" method="post">
-    <table border="2" align="center" cellpadding="5" cellspacing="5">
+    <table class="librarian" border="2" align="center" cellpadding="5" cellspacing="5">
         <tr>
         <td> Title:</td>
         <td>
@@ -23,5 +24,5 @@
         </tr>
     </table>
 </form>
-<a href='./librarian'><button>BACK TO HOME</button></a>
+<a href='./librarian'><button class="button">BACK TO HOME</button></a>
 </center>

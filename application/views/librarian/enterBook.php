@@ -1,9 +1,10 @@
+<link rel="stylesheet" href="./public/css/librarian.css" type="text/css">
 <!DOCTYPE HTML>
 <html>
 <body>
     <center><h2>ADD A BOOK</h2></center>
     <form enctype="multipart/form-data" action="./librarian/insertBook" method="post">
-        <table border="2" align="center" cellpadding="5" cellspacing="5">
+        <table class="librarian" border="2" align="center" cellpadding="5" cellspacing="5">
             <tr>
             <td> ISBN:</td>
             <td> <input type="number" name="isbn" min="1" oninput="validity.valid||(value='');" required placeholder="only number"> </td>
@@ -70,6 +71,6 @@
             </tr>
         </table>
     </form>
-    <center><a href='./librarian'><button>BACK TO HOME</button></a></center>
+    <center><a href='./librarian'><button class="button">BACK TO HOME</button></a></center>
 </body>
 </html>

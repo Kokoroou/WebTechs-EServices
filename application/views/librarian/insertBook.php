@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 <html>
+<!-- <link rel="stylesheet" href="./public/css/librarian.css" type="text/css"> -->
+
 <body>
     <?php
         if ($existed){
@@ -16,7 +18,7 @@
         echo "<center>";
         echo "<a href='./librarian'><button>BACK TO HOME</button></a>";
         if ($existed){
-            echo "<a href='./librarian/enterBook'><button>RE-ADD BOOK</button></a>";
+            echo "<a href='./librarian/enterBook'><button >RE-ADD BOOK</button></a>";
         }
         else{
             echo "<a href='./librarian/enterBook'><button>ADD ANOTHER BOOK</button></a>";

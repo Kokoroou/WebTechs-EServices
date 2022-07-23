@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./public/css/style.css" type="text/css">
 <body>
 	<?php
 		function getAvatarPath() {
@@ -52,7 +53,7 @@
 			else {
 				print '
 					<span class="right">
-					<a href="./login">Login</a>
+					<a href="./login" style="color:white; font-size:25px; right:20px; float: right; position:relative"><u>Login</u></a>
 					</span>
 				';
 			}
@@ -60,11 +61,21 @@
 
 		<span class="center">
 				<form action="./searching" method="get">
-					<input type="text" placeholder="Book's name..." name="query"> <input type="submit" value="🔍">
+					<input class="search" type="text" placeholder="Book's name..." name="query" style="height:35px; width: 400px; border-radius: 10px"> 
+					 <input type="submit" value="🔍" style="height: 41px; border-radius:10px; width:50px; background-color: aquamarine"> 
+
 				</form>
 			</span>
 
-			
+			<!-- <span class="search_wrap search_wrap_3" >
+			<div class="search_box">
+				<input type="text" class="input" placeholder="search..." name="query">
+				<div class="btn btn_common">
+					<i class="fas fa-search" type="submit" ></i>
+					
+				</div>
+			</div>
+		</span> -->
 
 			
 		</div>

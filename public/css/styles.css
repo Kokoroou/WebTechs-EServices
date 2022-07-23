@@ -29,7 +29,7 @@ header{
 
 header .container {
     width: auto;
-    height: 100px;
+    height: 150px;
     position: relative;
 }
 
@@ -45,8 +45,12 @@ header .right {
 header .center {
     margin: 0 auto;
 }
-
-
+/* edit *******************************/
+.center {
+    height: 20px;
+    width: 80px;
+}
+/* edit *******************************/
 footer{ 
     background-color: #00000043;
     min-height: 50px;
@@ -115,3 +119,8 @@ a {
     margin-right: auto;
 
 } */
+.center {
+    position: relative;
+    top:20px;
+    
+}
