@@ -2,7 +2,7 @@
 
 /** Configuration Variables **/
 
-define ('DEVELOPMENT_ENVIRONMENT', true);  // Change this constant to 'false' for logging to file
+define ('DEVELOPMENT_ENVIRONMENT', false);  // Change this constant to 'false' for logging to file
 
 define('DB_NAME', 'library');
 define('DB_USER', 'librarian');
