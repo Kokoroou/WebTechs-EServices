@@ -25,8 +25,10 @@ class Librarian extends Model {
 		$book_titles = array();
 
         foreach($objects as $idx => $object){
-            array_push($book_ids, $object["Book.book"]["book_id"]);
-            array_push($book_titles, $object["Book.book"]["title"]);
+            if ($object["Book.book"]["book_id"] != 0) {
+                array_push($book_ids, $object["Book.book"]["book_id"]);
+                array_push($book_titles, $object["Book.book"]["title"]);
+            } 
         }
 
         return array($book_ids, $book_titles);

@@ -1,24 +1,25 @@
 <link rel="stylesheet" href="./public/css/booklist.css" type="text/css">
+<link rel="stylesheet" href="./public/css/librarian.css" type="text/css">
 
 <?php
 	if ($status == 0) {
 		print '
-		<center>
 		<div class="form-container">
-			<div class="form-header">Add Book to My Booklist</div>
-			<div class="form-notice">* Your list is public by default</div>		
+			<h1 class="form-header">Add Book to My Booklist</h1>
+			<div class="form-notice">* Your list is public by default</div>
 			<div class="form-data">
+				<center>
 				<form id="main-form" method="post" name="add-book" action="">
-				<table>
+				<table class="librarian">
 					<tbody>
 						<tr>
-							<td class="key">Book Title</td>
+							<td class="key">Book Title: </td>
 							<td class="value">
 								<a href="./book/?book_id=' . strval($book_id) . '">' . $book_title . '</a>
 							</td>
 						</tr>
 						<tr>
-							<td class="key">Booklist</td>
+							<td class="key">Booklist: </td>
 							<td class="value">
 								<select id="add-to-booklist" name="booklist_id" class="booklist">';
 
@@ -33,17 +34,16 @@
 					</tbody>
 				</table>
 				</form>
-			</div>		
+				</center>
+			</div>
 			<div class="form-submit">
-				<input type="submit" form="main-form" value="Submit">
+				<input class="button" type="submit" form="main-form" value="Submit">
 			</div>
 		</div>
-		</center>
 		';
 	}
 	elseif ($status == 1) {
 		print '
-		<center>
 		<div class="notice-container">
 			<div class="notice">
 				Successfully added book to your booklist
@@ -58,7 +58,6 @@
 				<a class="button" href="./booklist">Go to booklist</a>
 			</div>
 		</div>
-		</center>
 		';
 	}
 

@@ -1,7 +1,10 @@
+<link rel="stylesheet" href="./public/css/librarian.css" type="text/css">
+
 <div class="reset-password-box">
     <h1>Edit profile</h1>
+    <center>
     <form method="post" action="">
-        <table>
+        <table class="librarian">
             <tr>
                 <td><label for="username">Username</label></td>
                 <td><input id="username" name="username" type="text" value="<?php print $username;?>" readonly/></td>
@@ -20,9 +23,10 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" value="Save changes"/>
+                    <input class="button" type="submit" value="Save changes"/>
                 </td>
             </tr>
         </table>
     </form>
+</center>
 </div>

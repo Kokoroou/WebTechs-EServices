@@ -1,14 +1,15 @@
 <link rel="stylesheet" href="./public/css/booklist.css" type="text/css">
+<link rel="stylesheet" href="./public/css/librarian.css" type="text/css">
 
 <?php
     if ($status == 0) {
         print '
-        <center>
         <div class="form-container">
 	        <div class="form-header">Delete Booklist</div>	
             <div class="form-data">
+                <center>
                 <form id="main-form" method="post" name="delete-booklist" action="">
-                    <table>
+                    <table class="librarian">
                         <tbody>
                             <tr>
                                 <td class="key"><label for="booklist-name">Booklist Name:</label></td>
@@ -26,9 +27,10 @@
                         </tbody>
                     </table>
                 </form>
+                </center>
             </div>		
             <div class="form-submit">
-                <input type="submit" form="main-form" value="Submit">
+                <input class="button" type="submit" form="main-form" value="Submit">
             </div>
         </div>
         </center>
